@@ -14,6 +14,8 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name="employers")
 public class Employer extends User {
+	
+	
 
 	@Column(name="company_name")
 	private String companyName;
