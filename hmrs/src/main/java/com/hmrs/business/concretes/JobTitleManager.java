@@ -38,7 +38,7 @@ public class JobTitleManager implements JobTitleService{
 		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"İş pozisyonları getirildi.");
 	}
 	
-	//******
+	//--------BUSİNESS RULES-------
 	private boolean isExistJobTitle(String jobTitle) {
 		boolean result= false;
 		if (jobTitleDao.findByTitle(jobTitle)!=null) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hmrs.business.abstracts.EmployerService;
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.entities.concretes.Employer;
 
 @RestController
@@ -25,12 +26,12 @@ public class EmployersController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody Employer employer) {
-		this.employerService.add(employer);
+	public Result add(@RequestBody Employer employer) {
+		return this.employerService.add(employer);
 	}
 	
 	@GetMapping("/getall")
-	public List<Employer> getAll(){
+	public DataResult<List<Employer>> getAll(){
 		return this.employerService.getAll();
 	}
 	

@@ -2,9 +2,10 @@ package com.hmrs.business.abstracts;
 
 import java.util.List;
 
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.entities.concretes.Employer;
 
 public interface EmployerService {
-	void add(Employer employer);
-	List<Employer> getAll();
+	Result add(Employer employer);
+	DataResult<List<Employer>> getAll();
 }

@@ -1,6 +1,7 @@
 package com.hmrs.business.concretes;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,17 @@ public class CandidateManager implements CandidateService{
 		if (isFieldNull(candidate)) {
 			return new ErrorResult("Boş alan bırakmayınız.");
 		}
+		else if(!isEmail(candidate.getEmailAddress())){
+			return new ErrorResult("Girmiş olduğunuz mail adresi uygun değildir.");
+		}
 		else if (!mernisVerification.isRealPerson(candidate)) {
 			return new ErrorResult("Gerçek kişi hatası");
 		}
-		else if (this.candidateDao.findByIdentificationNumber(candidate.getIdentificationNumber())!=null) {
+		else if (isIdentificationNumber(candidate)) {
 			return new ErrorResult("Girmiş olduğunuz kimlik numarası sistemde zaten mevcuttur.");
 		}
-		else if (this.candidateDao.findByEmailAddress(candidate.getEmailAddress())!=null) {
-			return new ErrorResult("Girmiş olduğunuz E-Posta adresi sistemde mevuttur.");
+		else if(isMailExist(candidate)) {
+			return new ErrorResult("Girmiş olduğunuz mail sistemde muvcuttur.");
 		}
 		this.mailVerification.isVerifyMail(candidate.getEmailAddress());
 		this.candidateDao.save(candidate);
@@ -52,15 +56,39 @@ public class CandidateManager implements CandidateService{
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(),"İş arayanlar getirildi");
 		
 	}
-	
+	//------------BUSİNESS RULES--------------
 	private boolean isFieldNull(Candidate candidate) {
 		boolean result=false;
-		if (candidate.getBirthDate()==null||candidate.getEmailAddress().isEmpty()||candidate.getFirstName().isEmpty()
+		if (candidate.getBirthDate()==null||candidate.getFirstName().isEmpty()
 				||candidate.getIdentificationNumber().isEmpty()||candidate.getLastName().isEmpty()||candidate.getPassword().isEmpty()) {
 			result=true;				
-		}					
-		System.out.println("--"+result);
+		}						
 		return result;		
+	}
+	
+	private boolean isEmail(String mail) {
+		String emailPattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+.(com|org|net|edu|gov|mil|biz|info|mobi)(.[A-Z]{2})?$";
+		Pattern pattern =Pattern.compile(emailPattern,Pattern.CASE_INSENSITIVE);
+		boolean result= pattern.matcher(mail).find();
+		if (result) {
+			return true;
+			}		
+		return false;
+	}
+
+	private boolean isMailExist(Candidate candidate) {
+		boolean result=false;
+		if (candidateDao.findByEmailAddress(candidate.getEmailAddress())!=null) {
+			result= true;
+		}		
+		return result;
+	}
+	private boolean isIdentificationNumber(Candidate candidate) {
+		boolean result=false;
+		if (candidateDao.findByIdentificationNumber(candidate.getIdentificationNumber())!=null) {
+			result= true;
+		}		
+		return result;
 	}
 	
 
