@@ -2,11 +2,12 @@ package com.hmrs.business.abstracts;
 
 import java.util.List;
 
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.entities.concretes.Candidate;
 
 public interface CandidateService {
-	void add(Candidate candidate);
-	List<Candidate> getAll();
+	Result add(Candidate candidate);
+	DataResult<List<Candidate>> getAll();
 	
 
 }

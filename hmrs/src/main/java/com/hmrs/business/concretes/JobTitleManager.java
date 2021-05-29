@@ -6,28 +6,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hmrs.business.abstracts.JobTitleService;
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.dataAccess.abstracts.JobTitleDao;
 import com.hmrs.entities.concretes.JobTitle;
 
 @Service
 public class JobTitleManager implements JobTitleService{
 	
-	private JobTitleDao jobtitleDao;
+	private JobTitleDao jobTitleDao;
 	
 	@Autowired
 	public JobTitleManager(JobTitleDao jobtitleDao) {
 		super();
-		this.jobtitleDao = jobtitleDao;
+		this.jobTitleDao = jobtitleDao;
 	}
 
 	@Override
-	public void add(JobTitle jobTitle) {
-		this.jobtitleDao.save(jobTitle);
+	public Result add(JobTitle jobTitle) {	
+		if (jobTitle.getTitle().isEmpty()) {
+			return new ErrorResult("İş pozisyonu boş bırakılamaz.");
+		}
+		if (isExistJobTitle(jobTitle.getTitle())) {
+			return new ErrorResult("Daha önce var olan bir pozisyon ekleyemezsiniz.");
+		}
+		this.jobTitleDao.save(jobTitle);
+		return new SuccessResult("Eklendi");
 	}
-
+	
 	@Override
-	public List<JobTitle> getAll() {
-		return this.jobtitleDao.findAll();
+	public DataResult<List<JobTitle>> getAll() {
+		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"İş pozisyonları getirildi.");
+	}
+	
+	//******
+	private boolean isExistJobTitle(String jobTitle) {
+		boolean result= false;
+		if (jobTitleDao.findByTitle(jobTitle)!=null) {
+			result= true;			
+		}
+		return result;
 	}
 
 }

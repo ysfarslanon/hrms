@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hmrs.business.abstracts.JobTitleService;
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.entities.concretes.JobTitle;
 
 @RestController
@@ -23,12 +24,12 @@ public class JobTitlesController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody JobTitle jobTitle) {
-		this.jobTitleService.add(jobTitle);
+	public Result add(@RequestBody JobTitle jobTitle) {
+		return this.jobTitleService.add(jobTitle);
 	}
 	
 	@GetMapping("/getall")
-	public List<JobTitle> getAll(){
+	public DataResult<List<JobTitle>> getAll(){
 		return this.jobTitleService.getAll();
 	}
 

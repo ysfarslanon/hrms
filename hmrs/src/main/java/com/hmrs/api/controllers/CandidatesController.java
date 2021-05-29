@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.core.utilities.result.*;
 import com.hmrs.entities.concretes.Candidate;
 
 @RestController
-@RequestMapping(path="/api/candidates")
+@RequestMapping("/api/candidates")
 public class CandidatesController {
 	
 	private CandidateService candidateService;
@@ -25,12 +26,12 @@ public class CandidatesController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody Candidate candidate) {
-		this.candidateService.add(candidate);
+	public Result add(@RequestBody Candidate candidate) {
+		return this.candidateService.add(candidate);
 	}
 	
 	@GetMapping("/getall")
-	public List<Candidate> getAll(){
+	public DataResult<List<Candidate>> getAll(){
 		return this.candidateService.getAll();
 	}
 }
