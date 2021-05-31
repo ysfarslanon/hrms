@@ -47,11 +47,12 @@ public class EmployerManager implements EmployerService{
 	public DataResult<List<Employer>> getAll() {		
 		return new SuccessDataResult(this.employerDao.findAll(), "Şirketler Listelendi");
 	}
+	
 //-------------------------BUSİNESS RULES-------------
 	private boolean isFieldNull(Employer employer) {
 		boolean result=false;
 		if (employer.getCompanyName().isEmpty()||employer.getWebAddress().isEmpty()||employer.getPassword().isEmpty()
-				||employer.getPhones().isEmpty()){
+				||employer.getPhone().isEmpty()){
 			result=true;				
 		}						
 		return result;		
@@ -80,7 +81,7 @@ public class EmployerManager implements EmployerService{
 		String[] mailSplit=mail.split("@");
 		if (mailSplit[1].equals(employer.getWebAddress())) {
 			return true;
-		}
+		}		
 		return false;
 	}
 }

@@ -1,6 +1,11 @@
 package com.hmrs.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="job_titles")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_posts"})
 public class JobTitle {
 
 	@Id
@@ -21,5 +27,7 @@ public class JobTitle {
 	@Column(name="title")
 	private String title;
 	
-	
+	@OneToMany(mappedBy="jobTitle")
+	@JsonIgnore
+	private List<JobPost> jobPost;
 }

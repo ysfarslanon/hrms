@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -13,6 +15,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name="employers")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_posts"})
 public class Employer extends User {
 	
 
@@ -22,8 +25,11 @@ public class Employer extends User {
 	@Column(name="web_address")
 	private String webAddress;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy = "employer",orphanRemoval = true)
-	@JsonManagedReference
-	private List<EmployerPhone> phones;
+	@Column(name="phone")
+	private String phone;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="employer")
+	private List<JobPost> jobPost;
 	
 }
