@@ -37,13 +37,32 @@ public class JobPostsController {
 		return this.jobPostService.getAll();
 	}
 	
-	@GetMapping("/getbystatustrue")
+	@GetMapping("/getByStatusTrue")
 	public DataResult<List<JobPost>> getByStatusActive(){
 		return this.jobPostService.getByStatusActive();
 	}
 	
-	@GetMapping("/getbystatustrueanddeadlinebefore")
+	@GetMapping("/getByStatusActiveAndDeadlineBefore")
 	public DataResult<List<JobPost>> getByStatusActiveAndDeadlineBefore(Date date) {
 		return this.jobPostService.getByStatusActiveAndDeadlineBefore(date);
+	}
+	
+	@GetMapping("/getByStatusActivePublishDateAsc")
+	public DataResult<List<JobPost>> getByStatusActivePublishDateAsc() {
+		return this.jobPostService.getByStatusActivePublishDateAsc();
+	}
+	
+	@GetMapping("/getByStatusActivePublishDateDesc")
+	public DataResult<List<JobPost>> getByStatusActivePublishDateDesc() {
+		return this.jobPostService.getByStatusActivePublishDateDesc();
+	}
+	@GetMapping("/getByStatusActiveDeadlineDateAsc")
+	public DataResult<List<JobPost>> getByStatusActiveDeadlineDateAsc() {
+		return this.jobPostService.getByStatusActiveDeadlineDateAsc();
+	}
+	
+	@GetMapping("/getByStatusActiveDeadlineDateDesc")
+	public DataResult<List<JobPost>> getByStatusActiveDeadlineDateDesc() {
+		return this.jobPostService.getByStatusActiveDeadlineDateDesc();
 	}
 }

@@ -11,4 +11,8 @@ public interface JobPostDao extends JpaRepository<JobPost,Integer>{
 
 	List<JobPost> findByIsStatusTrue();
 	List<JobPost> findByIsStatusTrueAndDeadlineDateBefore(Date date);
+	List<JobPost> findAllByIsStatusTrueOrderByPublishDateAsc();
+	List<JobPost> findAllByIsStatusTrueOrderByPublishDateDesc();
+	List<JobPost> findAllByIsStatusTrueOrderByDeadlineDateAsc();
+	List<JobPost> findAllByIsStatusTrueOrderByDeadlineDateDesc();
 }

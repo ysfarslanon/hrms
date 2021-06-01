@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hmrs.business.abstracts.JobPostService;
@@ -44,6 +45,26 @@ public class JobPostManager implements JobPostService{
 	@Override
 	public DataResult<List<JobPost>> getByStatusActiveAndDeadlineBefore(Date date) {
 		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByIsStatusTrueAndDeadlineDateBefore(date),"Aktif ilanlar listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActivePublishDateAsc() {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAllByIsStatusTrueOrderByPublishDateAsc(),"Aktif ilanlar oluşturma tarihine göre artan sıralamayla listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActivePublishDateDesc() {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAllByIsStatusTrueOrderByPublishDateDesc(),"Aktif ilanlar oluşturma tarihine göre azalan sıralamayla listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActiveDeadlineDateAsc() {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAllByIsStatusTrueOrderByDeadlineDateAsc(),"Aktif ilanlar bitiş tarihine göre artan sıralamayla listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActiveDeadlineDateDesc() {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAllByIsStatusTrueOrderByDeadlineDateDesc(),"Aktif ilanlar bitiş tarihine göre azalan sıralamayla listelendi");
 	}
 
 	
