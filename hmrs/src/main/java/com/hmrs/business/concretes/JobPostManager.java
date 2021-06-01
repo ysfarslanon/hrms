@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hmrs.business.abstracts.JobPostService;
 import com.hmrs.core.utilities.result.DataResult;
+import com.hmrs.core.utilities.result.ErrorDataResult;
 import com.hmrs.core.utilities.result.Result;
 import com.hmrs.core.utilities.result.SuccessDataResult;
 import com.hmrs.core.utilities.result.SuccessResult;
@@ -68,8 +69,36 @@ public class JobPostManager implements JobPostService{
 	}
 
 	@Override
-	public DataResult<List<JobPost>> getByStatusActiveAndCompanyId(int companyId){
+	public DataResult<List<JobPost>> getByStatusActiveAndEmployerId(int companyId){
 	return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByIsStatusTrueAndEmployer_Id(companyId),"Aktif şirket ilanları listelendi");
 	
 	}
+
+	@Override
+	public DataResult<JobPost> setStatus(int jobPostId, int employerId, boolean isStatus) {
+		
+		List<JobPost> posts=this.jobPostDao.findByEmployer_Id(employerId);
+		
+		for(JobPost p:posts) {
+			if(jobPostId==p.getId()) {
+				p.setStatus(isStatus);
+				this.jobPostDao.save(p);
+				return new SuccessDataResult<JobPost>(this.jobPostDao.findById(jobPostId),"Değişti");
+			}
+		}
+		return new ErrorDataResult<JobPost>();
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByEmployerId(int employerId) {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByEmployer_Id(employerId),"Firmaya ait iş ilanları sıralandı.");
+	}
+
+	public DataResult<JobPost> getById(int jobPostId) {
+		return new SuccessDataResult<JobPost>(this.jobPostDao.findById(jobPostId), "İş ilanı getirildi");
+	}
+
+	
+
+	
 }

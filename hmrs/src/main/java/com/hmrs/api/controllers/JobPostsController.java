@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hmrs.business.abstracts.JobPostService;
@@ -67,7 +68,18 @@ public class JobPostsController {
 	}
 	
 	@GetMapping("/getByStatusActiveAndCompanyId")
-	public DataResult<List<JobPost>> getByStatusActiveAndCompanyId(int companyId){
-		return this.jobPostService.getByStatusActiveAndCompanyId(companyId);
+	public DataResult<List<JobPost>> getByStatusActiveAndEmployerId(int employerId){
+		return this.jobPostService.getByStatusActiveAndEmployerId(employerId);
 	}
+	
+	@GetMapping("/getById")
+	public DataResult<JobPost> getById(@RequestParam int jobPostId){
+		return this.jobPostService.getById(jobPostId);
+	}
+	
+	@GetMapping("/setStatus")
+	public DataResult<JobPost> setStatus(@RequestParam  int jobPostId,@RequestParam int employerId,@RequestParam boolean isStatus){
+		return this.jobPostService.setStatus(jobPostId, employerId, isStatus);
+	}
+	
 }
