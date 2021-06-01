@@ -1,5 +1,6 @@
 package com.hmrs.api.controllers;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,15 @@ public class JobPostsController {
 	@GetMapping("/getall")
 	public DataResult<List<JobPost>> getall(){
 		return this.jobPostService.getAll();
+	}
+	
+	@GetMapping("/getbystatustrue")
+	public DataResult<List<JobPost>> getByStatusActive(){
+		return this.jobPostService.getByStatusActive();
+	}
+	
+	@GetMapping("/getbystatustrueanddeadlinebefore")
+	public DataResult<List<JobPost>> getByStatusActiveAndDeadlineBefore(Date date) {
+		return this.jobPostService.getByStatusActiveAndDeadlineBefore(date);
 	}
 }

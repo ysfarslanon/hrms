@@ -1,5 +1,6 @@
 package com.hmrs.business.concretes;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,16 @@ public class JobPostManager implements JobPostService{
 	@Override
 	public DataResult<List<JobPost>> getAll() {
 		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAll(), "Bütün iş ilanları getirldi.");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActive() {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByIsStatusTrue(),"Aktif ilanlar listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPost>> getByStatusActiveAndDeadlineBefore(Date date) {
+		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByIsStatusTrueAndDeadlineDateBefore(date),"Aktif ilanlar listelendi");
 	}
 
 	
