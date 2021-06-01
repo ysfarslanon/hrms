@@ -65,4 +65,9 @@ public class JobPostsController {
 	public DataResult<List<JobPost>> getByStatusActiveDeadlineDateDesc() {
 		return this.jobPostService.getByStatusActiveDeadlineDateDesc();
 	}
+	
+	@GetMapping("/getByStatusActiveAndCompanyId")
+	public DataResult<List<JobPost>> getByStatusActiveAndCompanyId(int companyId){
+		return this.jobPostService.getByStatusActiveAndCompanyId(companyId);
+	}
 }

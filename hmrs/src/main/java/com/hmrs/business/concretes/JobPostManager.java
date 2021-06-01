@@ -67,6 +67,9 @@ public class JobPostManager implements JobPostService{
 		return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findAllByIsStatusTrueOrderByDeadlineDateDesc(),"Aktif ilanlar bitiş tarihine göre azalan sıralamayla listelendi");
 	}
 
+	@Override
+	public DataResult<List<JobPost>> getByStatusActiveAndCompanyId(int companyId){
+	return new SuccessDataResult<List<JobPost>>(this.jobPostDao.findByIsStatusTrueAndEmployer_Id(companyId),"Aktif şirket ilanları listelendi");
 	
-
+	}
 }

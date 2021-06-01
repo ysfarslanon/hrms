@@ -17,4 +17,5 @@ public interface JobPostService {
 	DataResult<List<JobPost>> getByStatusActivePublishDateDesc();
 	DataResult<List<JobPost>> getByStatusActiveDeadlineDateAsc();
 	DataResult<List<JobPost>> getByStatusActiveDeadlineDateDesc();
+	DataResult<List<JobPost>> getByStatusActiveAndCompanyId(int companyId);
 }
