@@ -3,6 +3,8 @@ package com.hmrs.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,16 +22,22 @@ public class Employer extends User {
 	
 
 	@Column(name="company_name")
+	@NotNull
+	@NotBlank
 	private String companyName;
 	
 	@Column(name="web_address")
+	@NotNull
+	@NotBlank
 	private String webAddress;
 	
 	@Column(name="phone")
+	@NotNull
+	@NotBlank
 	private String phone;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="employer")
-	private List<JobPost> jobPost;
+	private List<JobPost> jobPosts;
 	
 }

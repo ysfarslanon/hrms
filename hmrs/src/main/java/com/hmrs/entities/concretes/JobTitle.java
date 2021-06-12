@@ -3,6 +3,8 @@ package com.hmrs.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,6 +27,8 @@ public class JobTitle {
 	private int id;
 	
 	@Column(name="title")
+	@NotNull
+	@NotBlank
 	private String title;
 	
 	@OneToMany(mappedBy="jobTitle")

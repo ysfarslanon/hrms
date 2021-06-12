@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -45,6 +47,8 @@ public class JobPost {
 	private City city;
 	
 	@Column(name="definition")
+	@NotNull
+	@NotBlank
 	private String definition;
 	
 	@Column(name="min_salary")
@@ -54,15 +58,16 @@ public class JobPost {
 	private int maxSalary;
 	
 	@Column(name="quantity")
+	@NotNull
 	private int quantity;
 	
 	@Column(name="deadline_date")
 	private Date deadlineDate;
 	
-	@Column(name="publish_date")
+	@Column(name="publish_date")	
 	private Date publishDate;
 	
-	@Column(name="is_status")
+	@Column(name="is_status")	
 	private boolean isStatus;
 	
 }

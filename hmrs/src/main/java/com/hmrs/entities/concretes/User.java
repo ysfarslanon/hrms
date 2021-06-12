@@ -1,6 +1,9 @@
 package com.hmrs.entities.concretes;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,10 +21,14 @@ public class User {
 	private int id;
 	
 	@Column(name="email_address")
+	@Email
+	@NotBlank
+	@NotNull
 	private String emailAddress;
 	
-	@JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
 	@Column(name="password")
+	@NotBlank
+	@NotNull
 	private String password;
 
 }
