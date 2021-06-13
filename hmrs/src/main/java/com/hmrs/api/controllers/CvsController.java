@@ -19,36 +19,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.business.abstracts.CvService;
 import com.hmrs.core.utilities.result.*;
-import com.hmrs.entities.concretes.Candidate;
-
-
+import com.hmrs.entities.concretes.Cv;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
-	
-	private CandidateService candidateService;
+@RequestMapping("/api/cvs")
+public class CvsController {
+	private CvService cvService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public CvsController(CvService cvService) {
 		super();
-		this.candidateService = candidateService;
+		this.cvService = cvService;
 	}
 	
+	
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+	public ResponseEntity<?> add(@Valid @RequestBody Cv cv){
+		return ResponseEntity.ok(this.cvService.add(cv));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+	public DataResult<List<Cv>> getAll(){
+		return this.cvService.getAll();
 	}
 	
+	@GetMapping("/getallbycandidateid")
+	public DataResult<List<Cv>> getAllByCandidateId(int candidateId){
+		return this.cvService.getAllByCandidateId(candidateId);
+	}
 	
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

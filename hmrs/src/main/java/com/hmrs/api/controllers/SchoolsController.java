@@ -16,38 +16,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.business.abstracts.SchoolService;
 import com.hmrs.core.utilities.result.*;
-import com.hmrs.entities.concretes.Candidate;
-
-
+import com.hmrs.entities.concretes.School;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/schools")
+public class SchoolsController {
 	
-	private CandidateService candidateService;
+	private SchoolService schoolService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public SchoolsController(SchoolService schoolService) {
 		super();
-		this.candidateService = candidateService;
+		this.schoolService = schoolService;
 	}
-	
+
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+	public ResponseEntity<?> add(@Valid @RequestBody School school) {		
+		return ResponseEntity.ok(this.schoolService.add(school));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+	public DataResult<List<School>> getAll(){
+		return this.schoolService.getAll();
 	}
 	
+	@GetMapping("/getallbycvid")
+	public DataResult<List<School>> getAllByCvId(@RequestParam int cvId){
+		return this.schoolService.getAllByCvId(cvId);
+	}
 	
+	@GetMapping("/getallbycviddesc")
+	public DataResult<List<School>> getAllByCvIdDesc(@RequestParam int cvId){
+		return this.schoolService.getAllByCvIdDesc(cvId);
+	}
+
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

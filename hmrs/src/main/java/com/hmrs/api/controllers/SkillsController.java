@@ -16,38 +16,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.business.abstracts.SkillService;
 import com.hmrs.core.utilities.result.*;
-import com.hmrs.entities.concretes.Candidate;
-
-
+import com.hmrs.entities.concretes.Skill;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/skills")
+public class SkillsController {
 	
-	private CandidateService candidateService;
+	private SkillService skillService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public SkillsController(SkillService skillService) {
 		super();
-		this.candidateService = candidateService;
+		this.skillService = skillService;
 	}
-	
+
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+	public ResponseEntity<?> add(@Valid @RequestBody Skill skill) {
+		return ResponseEntity.ok(this.skillService.add(skill));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+	public DataResult<List<Skill>> getAll(){
+		return this.skillService.getAll();
 	}
 	
-	
+	@GetMapping("/getallbycvid")
+	public DataResult<List<Skill>> getAllByCvId(@RequestParam int cvId){
+		return this.skillService.getAllByCvId(cvId);
+	}
+
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

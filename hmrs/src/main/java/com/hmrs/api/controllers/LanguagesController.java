@@ -16,38 +16,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.business.abstracts.LanguageService;
 import com.hmrs.core.utilities.result.*;
-import com.hmrs.entities.concretes.Candidate;
-
-
+import com.hmrs.entities.concretes.Language;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/languages")
+public class LanguagesController {
 	
-	private CandidateService candidateService;
+	private LanguageService languageService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public LanguagesController(LanguageService languageService) {
 		super();
-		this.candidateService = candidateService;
+		this.languageService = languageService;
 	}
-	
+
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+	public ResponseEntity<?> add(@Valid @RequestBody Language language) {
+		return ResponseEntity.ok(this.languageService.add(language));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+	public DataResult<List<Language>> getAll(){
+		return this.languageService.getAll();
 	}
 	
-	
+	@GetMapping("/getallbycvid")
+	public DataResult<List<Language>> getAllByCvId(@RequestParam int cvId){
+		return this.languageService.getAllByCvId(cvId);
+	}
+
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

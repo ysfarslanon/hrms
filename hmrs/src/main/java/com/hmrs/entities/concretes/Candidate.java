@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,6 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name="candidates")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","cv"})
 public class Candidate extends User{
 
 	@Column(name="first_name")
@@ -34,9 +36,13 @@ public class Candidate extends User{
 	@NotNull
 	private String identificationNumber;
 	
-	@Column(name="birth_date")
-	@NotNull
+	@Column(name="birth_date")	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date birthDate;
 	
+	
+	@OneToMany(mappedBy = "candidate")
+	@JsonIgnore
+	private List<Cv> cv;
 	
 }

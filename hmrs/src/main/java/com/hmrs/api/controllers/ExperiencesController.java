@@ -16,38 +16,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmrs.business.abstracts.CandidateService;
+import com.hmrs.business.abstracts.ExperienceService;
 import com.hmrs.core.utilities.result.*;
-import com.hmrs.entities.concretes.Candidate;
-
-
+import com.hmrs.entities.concretes.Experience;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/experiences")
+public class ExperiencesController {
 	
-	private CandidateService candidateService;
+	private ExperienceService experienceService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public ExperiencesController(ExperienceService experienceService) {
 		super();
-		this.candidateService = candidateService;
+		this.experienceService = experienceService;
 	}
-	
+
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+	public ResponseEntity<?> add(@Valid @RequestBody Experience experience) {
+		return ResponseEntity.ok(this.experienceService.add(experience));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+	public DataResult<List<Experience>> getAll(){
+		return this.experienceService.getAll();
 	}
 	
+	@GetMapping("/getallbycvid")
+	public DataResult<List<Experience>> getAllByCvId(@RequestParam int cvId){
+		return this.experienceService.getAllByCvId(cvId);
+	}
 	
+	@GetMapping("/getallbycviddesc")
+	public DataResult<List<Experience>> getAllByCvIdDesc(@RequestParam int cvId){
+		return this.experienceService.getAllByCvIdDesc(cvId);
+	}
+
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

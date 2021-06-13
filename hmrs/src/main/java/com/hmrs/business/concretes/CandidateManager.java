@@ -52,6 +52,7 @@ public class CandidateManager implements CandidateService{
 		
 	}
 	
+	
 	//------------BUSİNESS RULES--------------
 
 	private boolean isMailExist(Candidate candidate) {
@@ -68,6 +69,7 @@ public class CandidateManager implements CandidateService{
 		}		
 		return result;
 	}
+
 	
 	
 	
