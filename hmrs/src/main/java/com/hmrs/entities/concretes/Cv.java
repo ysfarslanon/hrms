@@ -72,4 +72,8 @@ public class Cv {
 	@OneToMany(mappedBy = "cv")
 	@JsonIgnore
 	private List<School> schools;
+	
+	@OneToMany(mappedBy = "cv")
+	@JsonIgnore
+	private List<Image> images; 
 }
