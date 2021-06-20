@@ -11,14 +11,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name="candidates")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","cv"})
+@AllArgsConstructor
+@NoArgsConstructor
 public class Candidate extends User{
 
 	@Column(name="first_name")

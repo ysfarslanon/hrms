@@ -39,10 +39,6 @@ public class ImagesController {
 		return this.imageService.add(image, imageFile);
 	}
 	
-	/*
-	 * @GetMapping("/getbyid") public DataResult<Image> getById(@RequestParam("id")
-	 * int id){ return this.imageService.get(id); }
-	 */
 	
 	@GetMapping("/getall")
 	public DataResult<List<Image>> getAll(){
@@ -50,7 +46,7 @@ public class ImagesController {
 	}
 	
 	
-	@GetMapping("/getbycvıd")
+	@GetMapping("/getbycvid")
 	public DataResult<List<Image>> getAllByCvId(@RequestParam int cvId){
 		return this.imageService.getAllByCvId(cvId);
 	}

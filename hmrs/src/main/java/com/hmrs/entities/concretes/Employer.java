@@ -10,14 +10,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper=false)
 @Data
 @Entity
 @Table(name="employers")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_posts"})
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employer extends User {
 	
 
