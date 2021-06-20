@@ -55,6 +55,11 @@ public class ExperiencesController {
 	public DataResult<List<Experience>> getAllByCvIdDesc(@RequestParam int cvId){
 		return this.experienceService.getAllByCvIdDesc(cvId);
 	}
+	
+	@GetMapping("/getbyid")
+	public DataResult<Experience> getById(@RequestParam int id){
+		return this.experienceService.getById(id);
+	}
 
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

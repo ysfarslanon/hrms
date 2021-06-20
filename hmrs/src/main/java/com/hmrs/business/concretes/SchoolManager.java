@@ -45,4 +45,9 @@ public class SchoolManager implements SchoolService{
 		return new SuccessDataResult<List<School>>(this.schoolDao.findAllByCv_IdOrderByEndDateDesc(cvId), "Cv okulları listelendi");
 	}
 
+	@Override
+	public DataResult<School> getById(int id) {
+		return new SuccessDataResult<School>(this.schoolDao.findById(id), "Okul getirildi.");
+	}
+
 }

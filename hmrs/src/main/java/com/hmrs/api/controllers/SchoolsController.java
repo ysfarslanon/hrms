@@ -55,6 +55,11 @@ public class SchoolsController {
 	public DataResult<List<School>> getAllByCvIdDesc(@RequestParam int cvId){
 		return this.schoolService.getAllByCvIdDesc(cvId);
 	}
+	
+	@GetMapping("/getbyid")
+	public DataResult<School> getById(@RequestParam int id){
+		return this.schoolService.getById(id);
+	}
 
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

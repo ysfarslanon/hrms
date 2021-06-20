@@ -50,7 +50,11 @@ public class SkillsController {
 	public DataResult<List<Skill>> getAllByCvId(@RequestParam int cvId){
 		return this.skillService.getAllByCvId(cvId);
 	}
-
+	
+	@GetMapping("/getbyid")
+	public DataResult<Skill> getById(@RequestParam int id){
+		return this.skillService.getById(id);
+	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -48,8 +48,13 @@ public class CandidateManager implements CandidateService{
 
 	@Override
 	public DataResult<List<Candidate>> getAll() {
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(),"İş arayanlar getirildi");
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(),"İş arayanlar getirildi.");
 		
+	}
+	
+	@Override
+	public DataResult<Candidate> getById(int id) {
+		return new SuccessDataResult<Candidate>(this.candidateDao.findById(id), "İş arayan getrildi.");
 	}
 	
 	
@@ -69,6 +74,8 @@ public class CandidateManager implements CandidateService{
 		}		
 		return result;
 	}
+
+	
 
 	
 	

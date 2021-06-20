@@ -37,5 +37,10 @@ public class SkillManager implements SkillService{
 	public DataResult<List<Skill>> getAllByCvId(int cvId) {
 		return new SuccessDataResult<List<Skill>>(this.skillDao.findAllByCv_Id(cvId), "CV yetenekleri listelendi");
 	}
+	
+	@Override
+	public DataResult<Skill> getById(int id) {
+		return new SuccessDataResult<Skill>(this.skillDao.findById(id), "Yetenek listelendi.");
+	}
 
 }

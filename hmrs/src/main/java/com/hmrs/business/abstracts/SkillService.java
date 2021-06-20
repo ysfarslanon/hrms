@@ -7,7 +7,8 @@ import com.hmrs.core.utilities.result.Result;
 import com.hmrs.entities.concretes.Skill;
 
 public interface SkillService {
-	public Result add(Skill language);
-	public DataResult<List<Skill>> getAll();
-	public DataResult<List<Skill>> getAllByCvId(int cvId);
+	Result add(Skill language);
+	DataResult<List<Skill>> getAll();
+	DataResult<List<Skill>> getAllByCvId(int cvId);
+	DataResult<Skill> getById(int id);
 }

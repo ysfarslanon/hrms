@@ -7,9 +7,9 @@ import com.hmrs.entities.concretes.School;
 
 public interface SchoolService {
 
-	public Result add(School school);
-	public DataResult<List<School>> getAll();
-	public DataResult<List<School>> getAllByCvId(int cvId);
-	public DataResult<List<School>> getAllByCvIdDesc(int cvId);
-	
+	Result add(School school);
+	DataResult<List<School>> getAll();
+	DataResult<List<School>> getAllByCvId(int cvId);
+	DataResult<List<School>> getAllByCvIdDesc(int cvId);
+	DataResult<School> getById(int id);
 }

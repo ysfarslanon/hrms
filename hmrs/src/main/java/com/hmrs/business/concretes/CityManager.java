@@ -25,6 +25,11 @@ public class CityManager implements CityService{
 	public DataResult<List<City>> getAll() {
 		return new SuccessDataResult(this.cityDao.findAll(), "Şehirler Listelendi");
 	}
+
+	@Override
+	public DataResult<City> getById(int id) {
+		return new SuccessDataResult<City>(this.cityDao.findById(id), "Şehir getirildi.");
+	}
 	
 	
 

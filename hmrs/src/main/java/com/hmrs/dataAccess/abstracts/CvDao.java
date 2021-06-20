@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.hmrs.entities.concretes.Cv;
 
 public interface CvDao extends JpaRepository<Cv,Integer>{
-
+	
 	List<Cv> findAllByCandidate_Id(int candidateId);
 	Cv findById(int cvId);
 }

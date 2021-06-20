@@ -48,6 +48,11 @@ public class EmployerManager implements EmployerService{
 		return new SuccessDataResult(this.employerDao.findAll(), "Şirketler Listelendi");
 	}
 	
+	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(this.employerDao.findById(id),"Şerket getirildi");
+	}
+	
 //-------------------------BUSİNESS RULES-------------
 	private boolean isFieldNull(Employer employer) {
 		boolean result=false;
@@ -84,4 +89,6 @@ public class EmployerManager implements EmployerService{
 		}		
 		return false;
 	}
+
+	
 }

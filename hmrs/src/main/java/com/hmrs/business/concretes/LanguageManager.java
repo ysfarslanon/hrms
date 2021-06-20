@@ -39,4 +39,9 @@ public class LanguageManager implements LanguageService{
 	public DataResult<List<Language>> getAllByCvId(int cvId) {
 		return new SuccessDataResult<List<Language>>(this.languageDao.findAllByCv_Id(cvId), "CV dilleri listelendi");
 	}
+
+	@Override
+	public DataResult<Language> getById(int id) {
+		return new SuccessDataResult<Language>(this.languageDao.findById(id), "Dil getirildi.");
+	}
 }

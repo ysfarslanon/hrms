@@ -50,6 +50,11 @@ public class LanguagesController {
 	public DataResult<List<Language>> getAllByCvId(@RequestParam int cvId){
 		return this.languageService.getAllByCvId(cvId);
 	}
+	
+	@GetMapping("/getbyid")
+	public DataResult<Language> getById(@RequestParam int id){
+		return this.languageService.getById(id);
+	}
 
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

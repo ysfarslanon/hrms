@@ -9,4 +9,5 @@ import com.hmrs.entities.concretes.Skill;
 public interface SkillDao extends JpaRepository<Skill,Integer>{
 
 	List<Skill> findAllByCv_Id(int cvId);
+	Skill findById(int id);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,11 @@ public class JobTitlesController {
 	@GetMapping("/getall")
 	public DataResult<List<JobTitle>> getAll(){
 		return this.jobTitleService.getAll();
+	}
+	
+	@GetMapping("/getbyid")
+	public DataResult<JobTitle> getById(@RequestParam int id){
+		return this.jobTitleService.getById(id);
 	}
 
 	

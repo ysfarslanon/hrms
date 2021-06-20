@@ -38,6 +38,11 @@ public class JobTitleManager implements JobTitleService{
 		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"İş pozisyonları getirildi.");
 	}
 	
+	@Override
+	public DataResult<JobTitle> getById(int id) {
+		return new SuccessDataResult<JobTitle>(this.jobTitleDao.findById(id),"İş pozisyonu getirildi.");
+	}
+	
 	//--------BUSİNESS RULES-------
 	private boolean isExistJobTitle(String jobTitle) {
 		boolean result= false;
@@ -46,5 +51,7 @@ public class JobTitleManager implements JobTitleService{
 		}
 		return result;
 	}
+
+	
 
 }

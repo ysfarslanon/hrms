@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.hmrs.entities.concretes.JobTitle;
 
 public interface JobTitleDao extends JpaRepository<JobTitle,Integer>{
-	JobTitle findByTitle(String title);//field name
 	
+	JobTitle findByTitle(String title);//field name
+	JobTitle findById(int id);
 
 }
